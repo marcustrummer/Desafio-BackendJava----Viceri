@@ -209,4 +209,7 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 **Build e Execução:** Adicionar informações no “readme” do código fonte para build e deploy da  aplicação. 
 
 **Código fonte:** o código fonte deve ser disponibilizado no GitHub e deverá haver uma branch  chamada “develop” no repositório com o código fonte disponibilizado.
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
