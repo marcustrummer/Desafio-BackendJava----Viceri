@@ -34,7 +34,7 @@ Caso você prefira algo mais prático realizei o deploy via heroku e é possíve
 ### Documentação do projeto 📁
 
 ```
-1. Para ter acesso a documentação da aplicação, visite o repositório [https://github.com/marcustrummer/Documentacao--Capgemini]
+1. Para ter acesso a documentação da aplicação, visite  [https://github.com/marcustrummer/Desafio-BackendJava----Viceri/blob/main/Documentacao/API%20REST%20-%20TASKS%20(TO-DO).pdf]
 ```
 
 
