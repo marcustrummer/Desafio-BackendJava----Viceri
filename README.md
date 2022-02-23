@@ -34,7 +34,8 @@ Caso você prefira algo mais prático realizei o deploy via heroku e é possíve
 ### Documentação do projeto 📁
 
 ```
-1. Para ter acesso a documentação da aplicação, visite  [https://github.com/marcustrummer/Desafio-BackendJava----Viceri/blob/main/Documentacao/API%20REST%20-%20TASKS%20(TO-DO).pdf]
+1. Para ter acesso a documentação da aplicação, visite  
+[https://github.com/marcustrummer/Desafio-BackendJava----Viceri/blob/main/Documentacao/API%20REST%20-%20TASKS%20(TO-DO).pdf]
 ```
 
 
@@ -79,13 +80,17 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 #### 1- Cadastro de um novo usuário
 
 ```
-1.1. A API deve receber o nome, e-mail e senha do usuário para realizar a criação do usuário. Todos  os campos são obrigatórios.
+1.1. A API deve receber o nome, e-mail e senha do usuário para realizar a criação do usuário.
+Todos  os campos são obrigatórios.
 
-1.2 A senha deve ser armazenada na forma de hash ou criptografada. Afinal, segurança é  importante.  Deve ser gerado automaticamente um ID para o usuário.
+1.2 A senha deve ser armazenada na forma de hash ou criptografada.
+Afinal, segurança é  importante.  Deve ser gerado automaticamente um ID para o usuário.
 
-1.3 Não deve permitir criar dois usuários com o mesmo e-mail, senão isso daria uma boa confusão  na hora do login.
+1.3 Não deve permitir criar dois usuários com o mesmo e-mail,
+senão isso daria uma boa confusão  na hora do login.
 
-1.4  Opcionalmente, pode-se implementar uma política de segurança de senha para aumentar a  segurança da aplicação.
+1.4  Opcionalmente, pode-se implementar uma política de segurança de senha para aumentar
+a  segurança da aplicação.
 ```
 
 <br>
@@ -97,9 +102,12 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 #### **2- Inclusão de uma nova tarefa**  
 
 ```
-2.1 A API deve receber no JSON a descrição da tarefa, e a prioridade (Alta, Média, Baixa).  O usuário não deverá ser passado no JSON da requisição.
+2.1 A API deve receber no JSON a descrição da tarefa, e a prioridade (Alta, Média, Baixa).
+O usuário não deverá ser passado no JSON da requisição.
 
-2.2 O usuário deve ser obtido através do  token de acesso, que poderá ser passado por exemplo no cabeçalho “Authorization”.  Deve ser gerado automaticamente um ID para a tarefa criada. 
+2.2 O usuário deve ser obtido através do  token de acesso, que poderá ser passado por exemplo
+no cabeçalho “Authorization”.
+Deve ser gerado automaticamente um ID para a tarefa criada. 
 ```
 
  <br>
@@ -114,7 +122,9 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 #### **3- Exclusão de uma tarefa**  
 
 ```
-3.1 A API deve receber o código da tarefa a ser excluída.  Se possível, validar que um usuário não exclua tarefas de outro usuário, para aumentar a  segurança da aplicação.
+3.1 A API deve receber o código da tarefa a ser excluída.
+Se possível, validar que um usuário não exclua tarefas de outro usuário, para aumentar a
+segurança da aplicação.
 ```
 
   <br>
@@ -130,7 +140,8 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 #### **4- Alteração de uma tarefa**
 
 ```
-4.1 A API deve ter um método para que seja atualizado a descrição e prioridade de uma tarefa.  Se possível, validar que um usuário não altere tarefas de outro usuário.  
+4.1 A API deve ter um método para que seja atualizado a descrição e prioridade de uma tarefa.
+Se possível, validar que um usuário não altere tarefas de outro usuário.  
 ```
 
 
@@ -144,7 +155,8 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 #### **5- Marcar uma tarefa como concluída**
 
 ```
-5.1 A API deve ter um método para que uma tarefa seja marcada como concluída.  Se possível, validar que um usuário não conclua tarefas de outro usuário. 
+5.1 A API deve ter um método para que uma tarefa seja marcada como concluída.
+Se possível, validar que um usuário não conclua tarefas de outro usuário. 
 ```
 
 
@@ -158,7 +170,8 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 #### **6- Listar as tarefas pendentes, filtrando opcionalmente pela prioridade**
 
 ```
-6.1  A API deve ter um método para retornar a lista de tarefas pendentes de um usuário. Não deve  listar tarefas concluídas. Deve ser possível filtrar pela prioridade.
+6.1  A API deve ter um método para retornar a lista de tarefas pendentes de um usuário.
+Não deve  listar tarefas concluídas. Deve ser possível filtrar pela prioridade.
 
 6.2  O usuário deve ser identificado pelo token de autenticação.
 ```
@@ -174,9 +187,11 @@ Leia com atenção todo esse documento antes de pôr a mão na massa!
 #### 7- **Autenticação do usuário por meio de e-mail e senha**
 
 ```
-7.1  A API deve receber o e-mail do usuário, e a senha. O sistema então deve procurar o usuário pelo  e-mail e validar a senha.
+7.1  A API deve receber o e-mail do usuário, e a senha.
+O sistema então deve procurar o usuário pelo  e-mail e validar a senha.
 
-7.2  Após verificado as credenciais, deve ser gerado um token de acesso. Preferencialmente utilizar  JWT. No final do documento há dicas sobre esse requisito
+7.2  Após verificado as credenciais, deve ser gerado um token de acesso.
+Preferencialmente utilizar  JWT. No final do documento há dicas sobre esse requisito
 ```
 
 <br>
