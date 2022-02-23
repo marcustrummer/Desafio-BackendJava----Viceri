@@ -1,9 +1,9 @@
 package br.com.desafioBackEndViceri.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.desafioBackEndViceri.model.Task;
-import br.com.desafioBackEndViceri.repository.TaskRepository;
+import br.com.desafioBackEndViceri.service.TaskService;
 
 
 @RestController
@@ -25,51 +26,51 @@ import br.com.desafioBackEndViceri.repository.TaskRepository;
 public class TaskController {
 	
 	@Autowired 
-	private TaskRepository taskRepository;
+	private TaskService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Task>> getAll (){
-		return ResponseEntity.ok(taskRepository.findAll()); // OK = 200
+	public ResponseEntity<List<Task>> lisAll() {
+		List<Task> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Task> getById(@PathVariable long id) {
-		return taskRepository.findById(id)
-				.map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.notFound().build());
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Task> findById(@PathVariable Integer id) {
+		Task obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
 	}
-	
-	@GetMapping("/statusTask/{statusTask}")
-	public ResponseEntity<List<Task>> getByStatus(@PathVariable String statusTask){
-		return ResponseEntity.ok(taskRepository.findAllByStatusTaskContainingIgnoreCase(statusTask));
+
+	@GetMapping(value = "/open")
+	public ResponseEntity<List<Task>> listOpen() {
+		List<Task> list = service.findAllOpen();
+		return ResponseEntity.ok().body(list);
 	}
-	
-	@GetMapping("/priority/{priority}")
-	public ResponseEntity<List<Task>> getByPriority(@PathVariable String priority){
-		return ResponseEntity.ok(taskRepository.findAllByPriorityContainingIgnoreCase(priority));
+
+	@GetMapping(value = "/close")
+	public ResponseEntity<List<Task>> listClose() {
+		List<Task> list = service.findAllClose();
+		return ResponseEntity.ok().body(list);
 	}
-	
-//	@GetMapping(value = "/open")
-//	public ResponseEntity<List<Task>> listOpen() {
-//		List<Task> list = service.findAllOpen();
-//		return ResponseEntity.ok().body(list);
-//	}
-	
-	
+
 	@PostMapping
-	public ResponseEntity<Task> postTask(@RequestBody Task task){
-		return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(task));
+	public ResponseEntity<Task> create(@RequestBody Task obj) {
+		obj = service.create(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).body(obj);// == .build()
+	}
+
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping
-	public ResponseEntity<Task> putTask(@RequestBody Task task){
-		return ResponseEntity.status(HttpStatus.OK).body(taskRepository.save(task));
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Task> update(@PathVariable Integer id, @RequestBody Task obj){
+		Task newObj = service.update(id, obj);	
+		return ResponseEntity.ok().body(newObj);
+		
 	}
-	
-	@DeleteMapping("/{id}")
-	public void deleteTask(@PathVariable long id) {
-		taskRepository.deleteById(id);
-	}	
 	
 
 }

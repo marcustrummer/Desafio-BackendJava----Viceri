@@ -1,17 +1,13 @@
 package br.com.desafioBackEndViceri.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,32 +15,71 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_tasks")
-public class Task {
+public class Task implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull
+	@NotNull(message = "O atributo title eh obrigatorio!")
 	@Size(min = 10)
 	private String title;
 	
 	
-	@NotNull
-	@Size(min=5, max=5, message="O atributo prioridade deve ser categorizado entre Alta Media e Baixa")
-	private String priority;
+	@NotNull(message = "O atributo prioridade nao pode ser nulo e deve ser categorizado 1-> 3 1-Alta, 2-Media, 3-Baixa")
+	private int priority;
 	
 	
 	@NotNull(message = "O atributo descricao eh obrigatorio!")
 	@Size(min=5, max=1000, message="O atributo descricao deve ter no minimo 5 e no maximo 1000 caracteres")
 	private String description;
 	
+	private Boolean finalizado = false;
+
+
+	public Task() {
+		super();
+	}
 	
-	@NotNull(message = "O atributo descricao eh obrigatorio e deve ser categorizado em Pendente e Concluido")
-	@Size(min= 8, max = 9)
-	private String statusTask;
-
-
+	public Task(long id, String title, String description, Boolean finalizado) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.finalizado = finalizado;
+	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		return id == other.id;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//relationship
 	@ManyToOne
 	@JsonIgnoreProperties("task")
 	private User user;
@@ -53,9 +88,6 @@ public class Task {
 	
 	
 	//GETTERS AND SETTERS
-	
-
-
 	public String getTitle() {
 		return title;
 	}
@@ -72,11 +104,13 @@ public class Task {
 		this.title = title;
 	}
 
-	public String getPriority() {
+
+
+	public int getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
@@ -96,13 +130,14 @@ public class Task {
 		this.user = user;
 	}
 
-	public String getStatusTask() {
-		return statusTask;
+	public Boolean getFinalizado() {
+		return finalizado;
 	}
 
-	public void setStatusTask(String statusTask) {
-		this.statusTask = statusTask;
+	public void setFinalizado(Boolean finalizado) {
+		this.finalizado = finalizado;
 	}
+
 
 
 

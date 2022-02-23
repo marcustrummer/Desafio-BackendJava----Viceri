@@ -11,8 +11,10 @@ import br.com.desafioBackEndViceri.model.Task;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long>{
 	
-//	@Query("SELECT tb_tasks FROM Task obj WHERE obj.finalizado = false ORDER BY obj.dataParaFinalizar")
-//	public List <Task> findAllByPriority();
-	public List <Task> findAllByStatusTaskContainingIgnoreCase(String statusTask);
-	public List <Task> findAllByPriorityContainingIgnoreCase(String priority);
+	@Query("SELECT obj FROM Task obj WHERE obj.finalizado = false ORDER BY obj.priority")
+	List<Task> findAllOpen();
+	
+	@Query("SELECT obj FROM Task obj WHERE obj.finalizado = true ORDER BY obj.priority")
+	List<Task> findAllClose();
+
 }
